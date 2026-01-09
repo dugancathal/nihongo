@@ -20,6 +20,7 @@ GEM
       tsort
     reline (0.6.3)
       io-console (~> 0.5)
+    rubyzip (3.2.2)
     stringio (3.2.0)
     tsort (0.2.0)
     zeitwerk (2.7.4)
@@ -30,6 +31,7 @@ PLATFORMS
 
 DEPENDENCIES
   irb (~> 1.16)
+  rubyzip (~> 3.2)
   zeitwerk (~> 2.7)
 
 BUNDLED WITH

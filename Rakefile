@@ -8,3 +8,8 @@ Minitest::TestTask.create(:test) do |t|
 end
 
 task :default => :test
+
+task :sync, [] => [:file] do |t, args|
+  require_relative './lib/nihongo'
+  Nihongo::Sync.call(path: args[:file])
+end
