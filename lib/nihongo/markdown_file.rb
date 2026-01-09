@@ -1,7 +1,5 @@
 module Nihongo
   class MarkdownFile
-    Card = Data.define(:front, :back)
-
     FILE_EXTENSION = ".mochi.md"
     CARD_BOUNDARY = /-------\n?\s*/m
     CARD_SIDE_BOUNDARY = /---\n\s*/m
@@ -14,7 +12,8 @@ module Nihongo
     def self.parse(filename:, content:)
       raw_cards = content.strip.split(CARD_BOUNDARY).map(&:strip)
       raw_front_backs = raw_cards.map { it.split(CARD_SIDE_BOUNDARY).map(&:strip) }
-      cards = raw_front_backs.map { |front, back| Card[front:, back:] }
+
+      cards = raw_front_backs.map { |front, back| Card[id: rand, front:, back:] }
       self.new(filename:, cards:)
     end
 

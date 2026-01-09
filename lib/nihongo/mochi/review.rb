@@ -1,6 +1,6 @@
 module Nihongo
   module Mochi
-    class Review
+    class Review < Data.define(:date, :due, :interval, :remembered, :duration)
       def self.parse(transit_json)
         self.new(
           date: TransitJson.timestampify(transit_json["~:date"]),
@@ -9,16 +9,6 @@ module Nihongo
           remembered: transit_json["~:remembered?"],
           duration: transit_json["~:duration"],
         )
-      end
-
-      attr_reader :date, :due, :interval, :remembered, :duration
-
-      def initialize(date:, due:, interval:, remembered:, duration:)
-        @date = date
-        @due = due
-        @interval = interval
-        @remembered = remembered
-        @duration = duration
       end
 
       def as_transit_json

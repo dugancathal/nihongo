@@ -1,6 +1,22 @@
 module Nihongo
   module Mochi
-    class Deck
+    class Deck < Data.define(
+      :id,
+      :cards,
+      :cards_view,
+      :forgetting_multiplier,
+      :max_interval,
+      :multiplier_noise,
+      :name,
+      :new_cards_limit,
+      :parent_id,
+      :remembering_multiplier,
+      :retire_cards,
+      :review_reverse,
+      :show_sides,
+      :sort,
+      :sort_by
+    )
       def self.parse(transit_json)
         cards = TransitJson.arrayify(transit_json["~:cards"]).map { Mochi::Card.parse(_1) }
         self.new(
@@ -22,8 +38,6 @@ module Nihongo
         )
       end
 
-      attr_reader :id, :cards, :cards_view, :forgetting_multiplier, :max_interval, :multiplier_noise, :name, :new_cards_limit, :parent_id, :remembering_multiplier, :retire_cards, :review_reverse, :show_sides, :sort, :sort_by
-
       def initialize(
         id:,
         name:,
@@ -41,21 +55,7 @@ module Nihongo
         sort: 2,
         new_cards_limit: nil
       )
-        @id = id
-        @name = name
-        @cards = cards
-        @parent_id = parent_id
-        @remembering_multiplier = remembering_multiplier
-        @show_sides = show_sides
-        @max_interval = max_interval
-        @multiplier_noise = multiplier_noise
-        @cards_view = cards_view
-        @review_reverse = review_reverse
-        @retire_cards = retire_cards
-        @sort_by = sort_by
-        @forgetting_multiplier = forgetting_multiplier
-        @sort = sort
-        @new_cards_limit = new_cards_limit
+        super
       end
 
       def as_transit_json
