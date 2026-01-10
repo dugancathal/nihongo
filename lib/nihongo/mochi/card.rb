@@ -14,7 +14,7 @@ module Nihongo
         )
       end
 
-      def initialize(content:, deck_id:, id: nil, name: nil, pos: nil, reviews: [], created_at: Time.now)
+      def initialize(content:, deck_id: nil, id: nil, name: nil, pos: nil, reviews: [], created_at: Time.now.utc.round(0))
         super(content:, deck_id:, id:, name:, pos:, reviews:, created_at:)
       end
 

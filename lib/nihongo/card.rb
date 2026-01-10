@@ -17,7 +17,6 @@ module Nihongo
     def as_mochi_attrs
       {
         content: "\n#{front}\n---\n#{back}\n",
-        deck_id: "~:initial",
       }
     end
   end

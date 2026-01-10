@@ -50,6 +50,18 @@ module Nihongo
 
         self.class.new(decks: updated)
       end
+
+      def dump_to(path:)
+        out_data = {
+          "~:version": 2,
+          "~:decks": decks.map(&:as_transit_json),
+        }
+
+        Zip::OutputStream.open(path) do |zip|
+          zip.put_next_entry("data.json")
+          zip << JSON.dump(out_data)
+        end
+      end
     end
   end
 end

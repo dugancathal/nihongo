@@ -13,9 +13,9 @@ module Nihongo
 
       def self.timestampify(maybe_timestamp)
         case maybe_timestamp
-        when /^~t\d{4}-/ then Time.parse(maybe_timestamp)
-        when /^~t\d+$/ then Time.at(maybe_timestamp[2..].to_i / 1000)
-        when Hash then Time.at(maybe_timestamp["~#dt"] / 1000)
+        when /^~t\d{4}-/ then Time.parse(maybe_timestamp).utc
+        when /^~t\d+$/ then Time.at(maybe_timestamp[2..].to_i / 1000).utc
+        when Hash then Time.at(maybe_timestamp["~#dt"] / 1000).utc
         else 
           raise Exception.new("Unable to timestamptify #{maybe_timestamp}")
         end
