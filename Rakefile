@@ -9,7 +9,14 @@ end
 
 task :default => :test
 
-task :sync, [:file] do |t, args|
+task :environment do
   require_relative './lib/nihongo'
+end
+
+task :sync, [:file] => [:environment] do |t, args|
   Nihongo::Sync.call(path: args[:file])
+end
+
+task :dump, [:file] => [:environment] do |t, args|
+  Nihongo::Sync.dump(to: args[:file])
 end
