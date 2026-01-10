@@ -52,12 +52,22 @@ module Nihongo
       end
 
       def dump_to(path:)
+         write_zip_of_decks(to: path, decks:)
+
+        decks.each do |deck|
+          write_zip_of_decks(to: path + ".#{deck.name}.mochi", decks: [deck])
+        end
+      end
+
+      private
+
+      def write_zip_of_decks(to:, decks:)
         out_data = {
           "~:version": 2,
-          "~:decks": decks.map(&:as_transit_json),
+          "~:decks": decks.map(&:as_transit_json)
         }
 
-        Zip::OutputStream.open(path) do |zip|
+        Zip::OutputStream.open(to) do |zip|
           zip.put_next_entry("data.json")
           zip << JSON.dump(out_data)
         end
