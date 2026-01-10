@@ -69,7 +69,7 @@ module Nihongo
           "~:max-interval": max_interval,
           "~:multiplier-noise?": multiplier_noise,
           "~:cards-view": cards_view,
-          "~:review_reverse?": review_reverse,
+          "~:review-reverse?": review_reverse,
           "~:retire-cards?": retire_cards,
           "~:sort-by/quick-study": sort_by,
           "~:forgetting-multiplier": forgetting_multiplier,
