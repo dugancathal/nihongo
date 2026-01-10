@@ -15,10 +15,11 @@ module Nihongo
         {
           "~:date": "~t#{date.to_i * 1000}",
           "~:due": "~t#{due.to_i * 1000}",
-          "~:interval": interval,
           "~:remembered?": remembered,
           "~:duration": duration,
-        }
+        }.merge({
+          "~:interval": interval,
+        }.compact)
       end
     end
   end

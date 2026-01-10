@@ -21,13 +21,14 @@ module Nihongo
       def as_transit_json
         {
           "~:content": content,
-          "~:deck_id": deck_id,
           "~:id": TransitJson.keywordify(id),
-          "~:name": name,
-          "~:pos": pos,
           "~:reviews": reviews.map(&:as_transit_json),
           "~:created-at": { "~#dt": created_at.to_i * 1000 },
-        }
+        }.merge({
+          "~:deck_id": deck_id,
+          "~:name": name,
+          "~:pos": pos,
+        }.compact)
       end
     end
   end
