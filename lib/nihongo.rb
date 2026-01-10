@@ -12,7 +12,7 @@ module Nihongo
     @logger = other
   end
 
-  def self.gen_id = @id_generator ? @id_generator.call : SecureRandom.uuid_v7
+  def self.gen_id = @id_generator ? @id_generator.call : SecureRandom.uuid_v7.gsub('-', '')
   def self.gen_id=(other)
     @id_generator = other
   end
