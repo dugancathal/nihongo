@@ -60,7 +60,7 @@ module Nihongo
 
       def as_transit_json
         {
-          "~:id": id,
+          "~:id": TransitJson.keywordify(id),
           "~:name": name,
           "~:cards": cards.map(&:as_transit_json),
           "~:parent-id": parent_id,

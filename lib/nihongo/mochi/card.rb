@@ -22,7 +22,7 @@ module Nihongo
         {
           "~:content": content,
           "~:deck_id": deck_id,
-          "~:id": id,
+          "~:id": TransitJson.keywordify(id),
           "~:name": name,
           "~:pos": pos,
           "~:reviews": reviews.map(&:as_transit_json),

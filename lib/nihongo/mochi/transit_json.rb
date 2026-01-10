@@ -20,6 +20,13 @@ module Nihongo
           raise Exception.new("Unable to timestamptify #{maybe_timestamp}")
         end
       end
+
+      def self.keywordify(str)
+        case str
+        when /^~:/ then str
+        else "~:#{str}"
+        end
+      end
     end
   end
 end
