@@ -11,9 +11,14 @@ module Nihongo
 
     def self.parse(filename:, content:)
       raw_cards = content.strip.split(CARD_BOUNDARY).map(&:strip)
-      raw_front_backs = raw_cards.map { it.split(CARD_SIDE_BOUNDARY).map(&:strip) }
+      cards = raw_cards.filter_map do |raw|
+        Card.try_parse(raw)
+      rescue Exception => e
+        Nihongo.logger.puts "Failed parsing card with content: #{raw}"
+        Nihongo.logger.puts e
+        nil
+      end
 
-      cards = raw_front_backs.map { |front, back| Card[id: rand, front:, back:] }
       self.new(filename:, cards:)
     end
 

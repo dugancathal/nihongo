@@ -3,6 +3,7 @@ require 'test_helper'
 class TestMarkdownFile < Minitest::Test
   def test_parse_file
     file = Nihongo::MarkdownFile.parse(content: <<~MARKDOWN, filename: "vocab-1")
+    #ID:123456
     Translate: happiness
     ---
     幸せ
@@ -11,8 +12,27 @@ class TestMarkdownFile < Minitest::Test
     assert_equal 1, file.cards.size
 
     card = file.cards.first
+    assert_equal "123456", card.id
     assert_equal "Translate: happiness", card.front
     assert_equal "幸せ", card.back
+  end
+
+  def test_parse_file_without_ids
+    Nihongo.gen_id = -> { "random-id-1234" }
+    file = Nihongo::MarkdownFile.parse(content: <<~MARKDOWN, filename: "vocab-1")
+    Translate: happiness
+    ---
+    幸せ
+    MARKDOWN
+
+    assert_equal 1, file.cards.size
+
+    card = file.cards.first
+    assert_equal "random-id-1234", card.id
+    assert_equal "Translate: happiness", card.front
+    assert_equal "幸せ", card.back
+  ensure
+    Nihongo.gen_id = nil
   end
 
   def test_parse_file_multiple_cards

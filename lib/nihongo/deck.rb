@@ -1,7 +1,7 @@
 module Nihongo
   class Deck < Data.define(:name, :id, :cards)
     def initialize(name:, id: nil, cards: [])
-      super(name:, id: id || rand, cards:)
+      super(name:, id: id || Nihongo.gen_id, cards:)
     end
 
     def add_cards(*cards)

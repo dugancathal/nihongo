@@ -1,8 +1,12 @@
 module Nihongo
   class MarkdownDecks
     def self.load(data_dir: File.expand_path("../../data", __dir__))
-      mdfiles = Dir[data_dir + "**/*.mochi.md"].map do |path|
+      mdfiles = Dir[data_dir + "**/*.mochi.md"].filter_map do |path|
         MarkdownFile.parse_file(path:)
+      rescue Exception => e
+        Nihongo.logger.puts "Failed to parse file: #{path}"
+        Nihongo.logger.puts e
+        nil
       end
 
       decks_by_name = Hash.new { |h, k| h[k] = Deck.new(name: k) }

@@ -1,8 +1,13 @@
 module Nihongo
   class Card < Data.define(:id, :front, :back)
-    # TODO: md files should define the ID ... somewhere
-    def initialize(front:, back:, id: nil)
-      super(id: id || rand, front:, back:)
+    def self.try_parse(raw)
+      lines = raw.lines.map(&:strip).reject(&:empty?)
+      id = raw.start_with?("#ID:") ? lines.shift.split(":").last : Nihongo.gen_id
+      side_boundary_index = lines.find_index { it == "---" }
+      front = lines[0...side_boundary_index].join("\n")
+      back = lines[side_boundary_index+1..].join("\n")
+
+      self.new(id:, front:, back:)
     end
 
     def to_mochi
