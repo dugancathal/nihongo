@@ -28,17 +28,18 @@ module Nihongo
         @decks = decks
       end
 
-      def merge(markdown_decks)
+      def merge(markdown_decks, root_deck: nil)
         return self if markdown_decks.empty?
 
         updated = markdown_decks.map do |mddeck|
           associated_mochi_deck = decks.find { it.id == mddeck.id }
 
-          next mddeck.to_mochi if associated_mochi_deck.nil?
+          associated_mochi_deck ||= mddeck.to_mochi
 
           mochi_cards = associated_mochi_deck.cards
           associated_mochi_deck.with(
             **mddeck.as_mochi_attrs,
+            parent_id: root_deck ? root_deck.id : associated_mochi_deck.parent_id,
             cards: mddeck.cards.map do |mdcard|
               associated_mochi_card = mochi_cards.find { it.id == mdcard.id }
 
@@ -48,7 +49,7 @@ module Nihongo
           )
         end
 
-        self.class.new(decks: updated)
+        self.class.new(decks: [root_deck, *updated].compact)
       end
 
       def dump_to(path:)

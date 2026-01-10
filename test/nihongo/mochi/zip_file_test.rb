@@ -51,6 +51,30 @@ class Nihongo::Mochi::ZipFileTest < Minitest::Test
     assert_equal [expected_deck], zipfile.merge(markdown_decks).decks
   end
 
+  def test_merge_with_root_deck_sets_parent_id_and_merges_root_deck_in
+    deck = Nihongo::Mochi::Deck.new(
+      id: "~:initial",
+      name: "Initial",
+      parent_id: "~:originalparent"
+    )
+    zipfile = Nihongo::Mochi::ZipFile.new(decks: [deck])
+
+    markdown_decks = Nihongo::MarkdownDecks.new(decks: [
+      Nihongo::Deck.new(id: "~:initial", name: "Initial", cards: []),
+    ])
+
+    root_deck = Nihongo::Mochi::Deck.new(
+      id: "~:newrootid",
+      name: "New Root"
+    )
+
+    expected_deck = deck.with(
+      parent_id: "~:newrootid"
+    )
+
+    assert_equal [root_deck, expected_deck], zipfile.merge(markdown_decks, root_deck:).decks
+  end
+
   def test_dump_to_generates_valid_mochi_file
     deck = Nihongo::Mochi::Deck.new(
       id: "~:initial",
