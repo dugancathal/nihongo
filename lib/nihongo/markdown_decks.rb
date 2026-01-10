@@ -9,7 +9,7 @@ module Nihongo
         nil
       end
 
-      decks_by_name = Hash.new { |h, k| h[k] = Deck.new(name: k) }
+      decks_by_name = Hash.new { |h, k| h[k] = Deck.new(id: "nihongodeck#{k.gsub('-','')}", name: k) }
 
       files_by_deck = mdfiles.group_by(&:deck_name)
       files_by_deck.each do |name, files|

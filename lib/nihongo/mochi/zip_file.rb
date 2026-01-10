@@ -32,7 +32,7 @@ module Nihongo
         return self if markdown_decks.empty?
 
         updated = markdown_decks.map do |mddeck|
-          associated_mochi_deck = decks.find { it.id == mddeck.id }
+          associated_mochi_deck = decks.find { it.id == TransitJson.keywordify(mddeck.id) }
 
           associated_mochi_deck ||= mddeck.to_mochi
 
@@ -41,9 +41,9 @@ module Nihongo
             **mddeck.as_mochi_attrs,
             parent_id: root_deck ? root_deck.id : associated_mochi_deck.parent_id,
             cards: mddeck.cards.map do |mdcard|
-              associated_mochi_card = mochi_cards.find { it.id == mdcard.id }
+              associated_mochi_card = mochi_cards.find { it.id == TransitJson.keywordify(mdcard.id) }
 
-              next mdcard.to_mochi if associated_mochi_card.nil?
+              associated_mochi_card ||= mdcard.to_mochi
               associated_mochi_card.with(**mdcard.as_mochi_attrs)
             end
           )
