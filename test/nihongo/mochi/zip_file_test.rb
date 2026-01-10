@@ -14,6 +14,7 @@ class Nihongo::Mochi::ZipFileTest < Minitest::Test
     deck = Nihongo::Mochi::Deck.new(
       id: "~:initial",
       name: "Initial",
+      parent_id: "~:parent",
       cards: [
         Nihongo::Mochi::Card.new(
           id: "~:card1234",
