@@ -51,37 +51,37 @@ What's the rule for conjugating -う verbs to past?
 #ID:109EA072A3EE4DB7866882F3ADCB8272
 Past tense of する
 ---
-した
+した (shita)
 -------
 #ID:DC377D365A3346B4924B220B5C995591
 Past tense of 来る
 ---
-きた
+きた (kita)
 -------
 #ID:48DD08FF0E1F4754BE841DDAF4B305AB
 Past tense of 行く
 ---
-行った
+行った (itta)
 -------
 #ID:067A51F922474BE7ACA12C53F1793AD6
 Translate: I ran today
 ---
-今日は走った
+今日は走った (kyou wa hashitta)
 -------
 #ID:60A8A499FE1D4C95B338B087014F51AF
 Translate: The friend came.
 ---
-友達は来た
+友達は来た (tomodachi wa kita)
 -------
 #ID:FDF84889A09A4183867C63FA3DBAB340
 Translate: I also played.
 ---
-私も遊んだ
+私も遊んだ (watashi mo asonda)
 -------
 #ID:AB2F04C8C6B74C21AA288D4354FA851C
 Translate: As for study, I did it.
 ---
-勉強はした
+勉強はした (benkyo wa shita)
 -------
 #ID:24A2721FD1704218A1FE593D99135867
 What's the rule for past negative conjugation?

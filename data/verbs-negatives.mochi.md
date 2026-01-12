@@ -26,21 +26,21 @@ Replace the -う with the わ and add -ない
 #ID:9D566E53C5B64EBF8B6BD4390992E940
 Translate: does not eat (食べる)
 ---
-食べない
+食べない (tabenai)
 -------
 #ID:9EF88A4E9033484398DC5D5BDA422814
 Translate: does not play (遊ぶ - asobu)
 ---
-遊ばない
+遊ばない (asobanai)
 -------
 #ID:0D0A09F0E14048C399DFC3B0726AE463
 Translate: does not buy (買う)
 ---
-買わない
+買わない (kawanai)
 -------
 #ID:2485D85FD3ED40D5B5EFFE2793220AE6
 Translate: there is no cat
 ---
-ねこはいない
+ねこはいない (neko wa inai)
 -------
 
