@@ -43,4 +43,39 @@ particle: で
 ---
 the "contextual" particle (by way of)
 -------
-
+#ID:BBA7DFD7D7F94539AF1887D62F416C15
+particle: と
+---
+the "inclusive" particle (means "and")
+-------
+#ID:BA75CE526E9E44E6831B76A93FE9BAF2
+particle: や
+---
+the "vague listing" particle (non-colloquial)
+-------
+#ID:15AFB46BFE3948CB9182A7029376A3C5
+particle: とか
+---
+the "vague listing" particle (colloquial)
+-------
+#ID:1A49080066B04DFC87E4A4571EDCD846
+particle: の - possession
+---
+1. Possession (ボブの本)
+1. As a noun from context (白いの)
+1. Convey a sense of "the thing is" (feminine - 忙しいの)
+1. Convey a sense of "the thing is" (masculine - 忙しいのだ)
+1. Convey a sense of "is it so?" (忙しいの？)
+1. Spatial relationships (机の上)
+1. Verbs into nouns (本の読むのがすきです)
+-------
+#ID:89F72E9444A94A1B941642F07F62AEE9
+particle: ね
+---
+"sentence ending" particle for ".., right?" or ".., isn't it?"
+-------
+#ID:81DFCB0C3BA049A5AD23E8653F725ADE
+particle: よ
+---
+"sentence ending" particle for "ya know"
+-------
