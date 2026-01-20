@@ -51,6 +51,19 @@ class TestMarkdownFile < Minitest::Test
     assert_equal ["幸せ", "行く"], file.cards.map(&:back)
   end
 
+  def test_parse_cloze_card
+    file = Nihongo::MarkdownFile.parse(content: <<~MARKDOWN, filename: "cloze-1")
+    #ID:cloze123
+    This is a {{cloze deletion}} test.
+    MARKDOWN
+
+    assert_equal 1, file.cards.size
+    card = file.cards.first
+    assert_equal "cloze123", card.id
+    assert_equal "This is a {{cloze deletion}} test.", card.front
+    assert_nil card.back
+  end
+
   def test_deck_name_comes_from_filename
     file = Nihongo::MarkdownFile.parse(content: "", filename: "vocab")
     assert_equal "vocab", file.deck_name

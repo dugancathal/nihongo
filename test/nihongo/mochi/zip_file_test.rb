@@ -109,4 +109,35 @@ class Nihongo::Mochi::ZipFileTest < Minitest::Test
 
     assert_equal [deck], dumped_decks
   end
+
+  def test_merge_cloze_card
+    deck = Nihongo::Mochi::Deck.new(
+      id: "~:initial",
+      name: "Initial",
+      cards: [
+        Nihongo::Mochi::Card.new(
+          id: "~:cloze123",
+          content: "\nThis is a {{cloze}}.\n",
+          deck_id: "~:initial"
+        )
+      ]
+    )
+    zipfile = Nihongo::Mochi::ZipFile.new(decks: [deck])
+
+    markdown_decks = Nihongo::MarkdownDecks.new(decks: [
+      Nihongo::Deck.new(id: "~:initial", name: "Initial", cards: [
+        Nihongo::Card.new(id: "~:cloze123", front: "This is a {{cloze}}.", back: nil),
+      ]),
+    ])
+
+    expected_deck = deck.with(
+      cards: [
+        deck.cards[0].with(
+          content: "\nThis is a {{cloze}}.\n",
+        )
+      ]
+    )
+
+    assert_equal [expected_deck], zipfile.merge(markdown_decks).decks
+  end
 end
