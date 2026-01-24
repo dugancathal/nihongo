@@ -1,7 +1,8 @@
 module StudyCards
   class MarkdownDecks
     def self.load(data_dir: File.expand_path("../../data", __dir__), root_deck: "nihongo")
-      mdfiles = Dir[data_dir + "**/*.mochi.md"].filter_map do |path|
+      decks_root = File.join(data_dir, root_deck)
+      mdfiles = Dir[File.join(decks_root, "**/*.mochi.md")].filter_map do |path|
         MarkdownFile.parse_file(path:)
       rescue Exception => e
         StudyCards.logger.puts "Failed to parse file: #{path}"
