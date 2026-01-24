@@ -18,4 +18,9 @@ Was friend.
 ---
 Was not friend.
 -------
+#ID:F56735FF29804CC3A9A9DB382497E310
+Translate: 昨日何お食べたか、忘れた。
+---
+Translate: Forgot what I ate yesterday (What did I eat yesterday?, Forgot.)
+-------
 
