@@ -1,4 +1,4 @@
-module Nihongo
+module StudyCards
   module Mochi
   end
 end

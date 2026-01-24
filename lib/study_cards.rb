@@ -6,7 +6,7 @@ require "securerandom"
 require "zeitwerk"
 loader = Zeitwerk::Loader.for_gem
 
-module Nihongo
+module StudyCards
   def self.logger = @logger || $stderr
   def self.logger=(other)
     @logger = other

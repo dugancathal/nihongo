@@ -1,15 +1,15 @@
-module Nihongo
+module StudyCards
   class MarkdownDecks
-    def self.load(data_dir: File.expand_path("../../data", __dir__))
+    def self.load(data_dir: File.expand_path("../../data", __dir__), root_deck: "nihongo")
       mdfiles = Dir[data_dir + "**/*.mochi.md"].filter_map do |path|
         MarkdownFile.parse_file(path:)
       rescue Exception => e
-        Nihongo.logger.puts "Failed to parse file: #{path}"
-        Nihongo.logger.puts e
+        StudyCards.logger.puts "Failed to parse file: #{path}"
+        StudyCards.logger.puts e
         nil
       end
 
-      decks_by_name = Hash.new { |h, k| h[k] = Deck.new(id: "nihongodeck#{k.gsub('-','')}", name: k) }
+      decks_by_name = Hash.new { |h, k| h[k] = Deck.new(id: "#{root_deck}deck#{k.gsub('-','')}", name: k) }
 
       files_by_deck = mdfiles.group_by(&:deck_name)
       files_by_deck.each do |name, files|
@@ -29,4 +29,3 @@ module Nihongo
     def empty? = @decks.empty?
   end
 end
-

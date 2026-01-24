@@ -1,7 +1,7 @@
-module Nihongo
+module StudyCards
   class Deck < Data.define(:name, :id, :cards)
     def initialize(name:, id: nil, cards: [])
-      super(name:, id: id || Nihongo.gen_id, cards:)
+      super(name:, id: id || StudyCards.gen_id, cards:)
     end
 
     def add_cards(*cards)
@@ -9,7 +9,7 @@ module Nihongo
     end
 
     def to_mochi
-      Nihongo::Mochi::Deck.new(
+      StudyCards::Mochi::Deck.new(
         id:,
         **as_mochi_attrs
       )

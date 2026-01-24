@@ -1,5 +1,5 @@
 $LOAD_PATH << File.expand_path('./lib', __dir__)
 
-require 'nihongo/app'
+require 'study_cards/app'
 
-run Nihongo::App
+run StudyCards::App

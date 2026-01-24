@@ -1,10 +1,10 @@
 require "test_helper"
 require "rack/test"
 
-class Nihongo::AppTest < Minitest::Test
+class StudyCards::AppTest < Minitest::Test
   include Rack::Test::Methods
 
-  def app = Nihongo::App
+  def app = StudyCards::App
 
   def test_get_index
     get "/"
@@ -15,8 +15,8 @@ class Nihongo::AppTest < Minitest::Test
     post "/sync", file: Rack::Test::UploadedFile.new("test/fixtures/vocab.mochi", "application/zip")
     assert_equal 200, last_response.status
 
-    response_zip = Nihongo::Mochi::ZipFile.parse_stream(stream: last_response.body)
-    actual_decks = Nihongo::MarkdownDecks.load
+    response_zip = StudyCards::Mochi::ZipFile.parse_stream(stream: last_response.body)
+    actual_decks = StudyCards::MarkdownDecks.load
     actual_deck_names = (actual_decks.map(&:name) + %w[Nihongo]).to_set
     assert_equal actual_deck_names, response_zip.decks.map(&:name).to_set
   end

@@ -1,4 +1,4 @@
-module Nihongo
+module StudyCards
   module Mochi
     class Card < Data.define(:content, :deck_id, :id, :name, :pos, :reviews, :reverse_reviews, :created_at)
       def self.parse(transit_json)

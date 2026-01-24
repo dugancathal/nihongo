@@ -1,4 +1,4 @@
-module Nihongo
+module StudyCards
   module Mochi
     class Review < Data.define(:date, :due, :interval, :remembered, :duration)
       def self.parse(transit_json)

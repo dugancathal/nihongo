@@ -2,10 +2,10 @@ require "minitest/autorun"
 
 
 $LOAD_PATH << File.expand_path("../lib", __dir__)
-require "nihongo"
+require "study_cards"
 
 class NoopLogger
   def puts = nil
 end
 
-Nihongo.logger = NoopLogger.new
+StudyCards.logger = NoopLogger.new

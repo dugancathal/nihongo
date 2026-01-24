@@ -1,8 +1,8 @@
-module Nihongo
+module StudyCards
   class Card < Data.define(:id, :front, :back)
     def self.try_parse(raw)
       lines = raw.lines.map(&:strip).reject(&:empty?)
-      id = raw.start_with?("#ID:") ? lines.shift.split(":").last : Nihongo.gen_id
+      id = raw.start_with?("#ID:") ? lines.shift.split(":").last : StudyCards.gen_id
       front = lines.join("\n")
 
       side_boundary_index = lines.find_index { it == "---" }
@@ -15,7 +15,7 @@ module Nihongo
     end
 
     def to_mochi
-      Nihongo::Mochi::Card.new(id:, **as_mochi_attrs)
+      StudyCards::Mochi::Card.new(id:, **as_mochi_attrs)
     end
 
     def as_mochi_attrs

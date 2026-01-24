@@ -1,7 +1,7 @@
 require "zip"
 require "tmpdir"
 
-module Nihongo
+module StudyCards
   module Mochi
     class ZipFile
       def self.parse(path:)

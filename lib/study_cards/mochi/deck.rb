@@ -1,4 +1,4 @@
-module Nihongo
+module StudyCards
   module Mochi
     class Deck < Data.define(
       :id,

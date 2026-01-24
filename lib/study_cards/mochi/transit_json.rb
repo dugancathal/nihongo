@@ -1,6 +1,6 @@
 require "date"
 
-module Nihongo
+module StudyCards
   module Mochi
     class TransitJson
       def self.arrayify(maybe_list)

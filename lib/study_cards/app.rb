@@ -1,9 +1,9 @@
 require "sinatra/base"
 require "stringio"
 
-require "nihongo"
+require "study_cards"
 
-module Nihongo
+module StudyCards
   class App < Sinatra::Base
     set :host_authorization, { permitted_hosts: [] }
 
@@ -18,7 +18,7 @@ module Nihongo
       attachment file_field[:filename] + ".synced.mochi"
 
       stream do |out|
-        Nihongo::Sync.stream(from: file_field[:tempfile], to: out)
+        StudyCards::Sync.stream(from: file_field[:tempfile], to: out)
       end
     end
   end

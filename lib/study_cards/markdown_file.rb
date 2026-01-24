@@ -1,4 +1,4 @@
-module Nihongo
+module StudyCards
   class MarkdownFile
     FILE_EXTENSION = ".mochi.md"
     CARD_BOUNDARY = /-------\n?\s*/m
@@ -14,8 +14,8 @@ module Nihongo
       cards = raw_cards.filter_map do |raw|
         Card.try_parse(raw)
       rescue Exception => e
-        Nihongo.logger.puts "Failed parsing card with content: #{raw}"
-        Nihongo.logger.puts e
+        StudyCards.logger.puts "Failed parsing card with content: #{raw}"
+        StudyCards.logger.puts e
         nil
       end
 

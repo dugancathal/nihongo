@@ -10,13 +10,13 @@ end
 task :default => :test
 
 task :environment do
-  require_relative './lib/nihongo'
+  require_relative './lib/study_cards'
 end
 
 task :sync, [:file] => [:environment] do |t, args|
-  Nihongo::Sync.call(path: args[:file])
+  StudyCards::Sync.call(path: args[:file])
 end
 
 task :dump, [:file] => [:environment] do |t, args|
-  Nihongo::Sync.dump(to: args[:file])
+  StudyCards::Sync.dump(to: args[:file])
 end
