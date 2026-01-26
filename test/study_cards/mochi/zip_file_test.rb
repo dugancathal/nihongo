@@ -63,7 +63,7 @@ class StudyCards::Mochi::ZipFileTest < Minitest::Test
       StudyCards::Deck.new(id: "~:initial", name: "Initial", cards: []),
     ])
 
-    root_deck = StudyCards::Mochi::Deck.new(
+    root_deck = StudyCards::Deck.new(
       id: "~:newrootid",
       name: "New Root"
     )
@@ -72,7 +72,7 @@ class StudyCards::Mochi::ZipFileTest < Minitest::Test
       parent_id: "~:newrootid"
     )
 
-    assert_equal [root_deck, expected_deck], zipfile.merge(markdown_decks, root_deck:).decks
+    assert_equal [root_deck.to_mochi, expected_deck], zipfile.merge(markdown_decks, root_deck:).decks
   end
 
   def test_dump_to_generates_valid_mochi_file

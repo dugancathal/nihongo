@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>StudyCards</title>
-  </head>
-  <body>
-    <h1>Welcome to StudyCards</h1>
-    <form method="post" action="/sync" enctype="multipart/form-data">
-      <input type="file" name="file"/>
-      <button type="submit">Upload</button>
-    </form>
-  </body>
+  <title>StudyCards</title>
+</head>
+<body>
+<h1>Welcome to StudyCards</h1>
+<form method="post" action="/sync" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="root_deck">Root Deck:</label>
+    <select name="root_deck" id="root_deck">
+      <% @decks.each do |deck| %>
+        <option value="<%= deck %>"><%= deck %></option>
+      <% end %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="file">File:</label>
+    <input type="file" name="file" id="file"/>
+  </div>
+  <button type="submit">Upload</button>
+</form>
+</body>
 </html>

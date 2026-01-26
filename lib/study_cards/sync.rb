@@ -1,33 +1,27 @@
 module StudyCards
   module Sync
-    ROOT_DECK = StudyCards::Mochi::Deck.new(
-      id: "~:nihongo123",
-      name: "Nihongo",
-      review_reverse: true
-    )
-
-    def self.call(path:)
+    def self.call(root_deck: "nihongo", path:)
       app_data = StudyCards::Mochi::ZipFile.parse(path:)
-      source_of_truth = StudyCards::MarkdownDecks.load
-      app_data.merge(source_of_truth, root_deck: ROOT_DECK).dump_to(path: path + ".#{Time.now.to_i}.mochi")
+      source_of_truth = StudyCards::MarkdownDecks.load(root_deck:)
+      app_data.merge(source_of_truth, root_deck: source_of_truth.root_deck).dump_to(path: path + ".#{Time.now.to_i}.mochi")
     end
 
-    def self.stream(from:, to:)
+    def self.stream(root_deck: "nihongo", from:, to:)
       app_data = StudyCards::Mochi::ZipFile.parse_stream(stream: from)
-      source_of_truth = StudyCards::MarkdownDecks.load
+      source_of_truth = StudyCards::MarkdownDecks.load(root_deck:)
 
       outstream = StringIO.new
-      app_data.merge(source_of_truth, root_deck: ROOT_DECK).stream_to(to: outstream)
+      app_data.merge(source_of_truth, root_deck: source_of_truth.root_deck).stream_to(to: outstream)
 
       outstream.rewind
       outstream.each { to << it }
     end
 
-    def self.dump(to:)
+    def self.dump(root_deck: "nihongo", to:)
       app_data = StudyCards::Mochi::ZipFile.new
 
-      source_of_truth = StudyCards::MarkdownDecks.load
-      app_data.merge(source_of_truth, root_deck: ROOT_DECK).dump_to(path: to)
+      source_of_truth = StudyCards::MarkdownDecks.load(root_deck:)
+      app_data.merge(source_of_truth, root_deck: source_of_truth.root_deck).dump_to(path: to)
     end
   end
 end

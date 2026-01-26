@@ -54,7 +54,7 @@ module StudyCards
           )
         end
 
-        self.class.new(decks: [root_deck, *updated].compact)
+        self.class.new(decks: [root_deck&.to_mochi, *updated].compact)
       end
 
       def dump_to(path:)

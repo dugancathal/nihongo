@@ -13,10 +13,16 @@ task :environment do
   require_relative './lib/study_cards'
 end
 
-task :sync, [:file] => [:environment] do |t, args|
-  StudyCards::Sync.call(path: args[:file])
+task :sync, [:root_deck, :file] => [:environment] do |t, args|
+  root_deck = args[:root_deck]
+  file = args[:file] || root_deck
+  root_deck = nil if args[:file].nil?
+  StudyCards::Sync.call(root_deck_dir: root_deck, path: file)
 end
 
-task :dump, [:file] => [:environment] do |t, args|
-  StudyCards::Sync.dump(to: args[:file])
+task :dump, [:root_deck, :file] => [:environment] do |t, args|
+  root_deck = args[:root_deck]
+  file = args[:file] || root_deck
+  root_deck = nil if args[:file].nil?
+  StudyCards::Sync.dump(root_deck_dir: root_deck, to: file)
 end
