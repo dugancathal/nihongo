@@ -6,8 +6,8 @@ module StudyCards
     end
 
     def self.load_all(data_dir: StudyCards.default_data_dir)
-      names.each_with_object({}) do |name, h|
-        h[name] = load(data_dir: data_dir + name, root_deck: name)
+      names(data_dir:).each_with_object({}) do |name, h|
+        h[name] = load(data_dir: data_dir, root_deck: name)
       end
     end
 

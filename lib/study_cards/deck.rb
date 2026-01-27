@@ -25,6 +25,10 @@ module StudyCards
         cards: cards.map(&:to_mochi)
       }
     end
+
+    def to_markdown
+      cards.map(&:to_markdown).join("\n")
+    end
   end
 end
 

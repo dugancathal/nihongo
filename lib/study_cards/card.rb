@@ -14,6 +14,11 @@ module StudyCards
       self.new(id:, front:, back:)
     end
 
+    def self.from_mochi(card:)
+      front, back = card.content.strip.split("\n---\n").map(&:strip)
+      self.new(id: card.id, front:, back:)
+    end
+
     def to_mochi
       StudyCards::Mochi::Card.new(id:, **as_mochi_attrs)
     end
@@ -25,6 +30,12 @@ module StudyCards
       {
         content: content.join,
       }
+    end
+
+    def to_markdown
+      content = ["#ID:#{id}", front]
+      content << "---" << back if back
+      content.join("\n")
     end
   end
 end

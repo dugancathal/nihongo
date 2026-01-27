@@ -1,4 +1,5 @@
 require "zip"
+require "yaml"
 require "tmpdir"
 
 module StudyCards
@@ -69,6 +70,22 @@ module StudyCards
         Zip::OutputStream.write_buffer(to) do |zip|
           write_decks_to_zip(zip:, decks:)
         end
+      end
+
+      def dump_markdown_to(path:, name:)
+        path = Pathname(path)
+        deck_dir = path + name
+        deck_dir.mkdir
+
+        decks.each do |mochi_deck|
+          markdown_deck = StudyCards::Deck.new(name: mochi_deck.name, id: mochi_deck.id, cards: [])
+          cards = mochi_deck.cards.map { |card| StudyCards::Card.from_mochi(card:) }
+          markdown_deck.add_cards(*cards)
+
+          (deck_dir + "#{mochi_deck.name}.mochi.md").write(markdown_deck.to_markdown)
+        end
+
+        (deck_dir + "config.yml").write(YAML.dump("id" => name, "name" => name))
       end
 
       private

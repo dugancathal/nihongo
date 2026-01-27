@@ -140,4 +140,50 @@ class StudyCards::Mochi::ZipFileTest < Minitest::Test
 
     assert_equal [expected_deck], zipfile.merge(markdown_decks).decks
   end
+
+  def test_dump_markdown
+    deck_alpha = StudyCards::Mochi::Deck.new(
+      id: "~:alpha",
+      name: "Alpha",
+      cards: [
+        StudyCards::Mochi::Card.new(
+          id: "~:card1234",
+          content: "\na\n---\nalpha\n",
+          deck_id: "~:alpha",
+          reviews: []
+        )
+      ]
+    )
+    deck_bravo = StudyCards::Mochi::Deck.new(
+      id: "~:bravo",
+      name: "Bravo",
+      cards: [
+        StudyCards::Mochi::Card.new(
+          id: "~:card5678",
+          content: "\nb\n---\nbravo\n",
+          deck_id: "~:bravo",
+          reviews: []
+        )
+      ]
+    )
+    zipfile = StudyCards::Mochi::ZipFile.new(decks: [deck_alpha, deck_bravo])
+
+    dumped_markdown_decks = nil
+    Dir.mktmpdir do |dir|
+      dir = Pathname(dir)
+      zipfile.dump_markdown_to(path: dir, name: 'nato')
+      dumped_markdown_decks = StudyCards::MarkdownDecks.load(data_dir: dir, root_deck: 'nato')
+    end
+
+    assert_equal ['nato', deck_alpha.name, deck_bravo.name], dumped_markdown_decks.map(&:name)
+    assert_equal 0, dumped_markdown_decks.root_deck.cards.size
+
+    dumped_decks = dumped_markdown_decks.map(&:itself)
+
+    alpha_card = StudyCards::Card.new(id: "card1234", front: "a", back: "alpha")
+    assert_equal alpha_card, dumped_decks[1].cards[0]
+
+    bravo_card = StudyCards::Card.new(id: "card5678", front: "b", back: "bravo")
+    assert_equal bravo_card, dumped_decks[2].cards[0]
+  end
 end
