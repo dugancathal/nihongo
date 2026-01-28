@@ -20,9 +20,16 @@ task :sync, [:root_deck, :file] => [:environment] do |t, args|
   StudyCards::Sync.call(root_deck_dir: root_deck, path: file)
 end
 
-task :dump, [:root_deck, :file] => [:environment] do |t, args|
+task :mochify, [:root_deck, :file] => [:environment] do |t, args|
   root_deck = args[:root_deck]
   file = args[:file] || root_deck
   root_deck = nil if args[:file].nil?
-  StudyCards::Sync.dump(root_deck_dir: root_deck, to: file)
+  StudyCards::Sync.mochify(root_deck_dir: root_deck, to: file)
+end
+
+task :markdownify, [:root_deck, :file] => [:environment] do |t, args|
+  root_deck = args[:root_deck]
+  file = args[:file] || root_deck
+  root_deck = nil if args[:file].nil?
+  StudyCards::Sync.markdownify(root_deck:, from: file)
 end
